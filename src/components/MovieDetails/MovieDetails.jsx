@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, Outlet } from 'react-router-dom';
+import { FiArrowLeft } from 'react-icons/fi';
 import { fetchMovieById } from 'services/api';
 
 const MovieDetails = () => {
@@ -26,10 +27,31 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Link to="/">Go back</Link>
+      <Link
+        to="/"
+        style={{
+          display: 'inline-flex',
+          gap: '4px',
+          marginBottom: '12px',
+          padding: '10px 20px',
+          backgroundColor: ' #4CAF50',
+          color: ' white',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textDecoration: 'none',
+          fontSize: '16px',
+          borderRadius: '12px',
+        }}
+      >
+        <FiArrowLeft style={{
+          width: '20px',
+          height: '20px'
+        }}/>
+        Go back
+      </Link>
       <div
         style={{
-          display: 'flex'
+          display: 'flex',
         }}
       >
         {poster_path && (
@@ -52,14 +74,20 @@ const MovieDetails = () => {
           </div>
           <div>
             <h4>Genres</h4>
-            <ul style={{
-          display: 'flex',
-          gap: '12px',
-          listStyle: 'none'
-        }}>{genres?.map(genre => <li>{genre.name}</li>)}</ul>
+            <ul
+              style={{
+                display: 'flex',
+                gap: '12px',
+                listStyle: 'none',
+              }}
+            >
+              {genres?.map(genre => (
+                <li key={genre.id}>{genre.name}</li>
+              ))}
+            </ul>
           </div>
         </div>
-        <Outlet/>
+        <Outlet />
       </div>
     </>
   );
