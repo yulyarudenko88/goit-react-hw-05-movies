@@ -43,7 +43,9 @@ const Layout = () => {
           </NavLink>
         </nav>
       </header>
-      <main>
+      <main style={{          
+          padding: '12px',
+        }}>
         <Outlet />
       </main>
       <footer style={{

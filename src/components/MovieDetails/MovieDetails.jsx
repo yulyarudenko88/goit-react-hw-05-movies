@@ -29,8 +29,7 @@ const MovieDetails = () => {
       <Link to="/">Go back</Link>
       <div
         style={{
-          display: 'flex',
-          padding: '12px',
+          display: 'flex'
         }}
       >
         {poster_path && (
