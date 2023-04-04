@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MoviesList } from "./MoviesGallery.styled";
+import MoviesGalleryItem from 'components/MoviesGalleryItem/MoviesGalleryItem';
+import { MoviesList } from './MoviesGallery.styled';
 
 const MoviesGallery = ({ movies }) => {
   return (
-    <MoviesList
-    >
+    <MoviesList>
       {movies.map(({ id, title, poster_path, overview }) => {
         let posterPath = '';
 
@@ -18,37 +17,13 @@ const MoviesGallery = ({ movies }) => {
         }
 
         return (
-          <li
+          <MoviesGalleryItem
             key={id}
-            style={{
-              backgroundColor: '#50c878',
-              border: '1px #102818',
-              borderRadius: '5px',
-              boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2)',
-              overflow: 'hidden',
-            }}
-          >
-            <Link
-              to={`movies/${id}`}
-              style={{ cursor: 'pointer', textDecoration: 'none' }}
-            >
-              <img
-                src={posterPath}
-                alt={overview}
-                style={{ display: 'block', width: '100%' }}
-              />
-              <p
-                style={{
-                  padding: '4px 8px',
-                  color: 'white',
-                  textTransform: 'uppercase',
-                  textAlign: 'center',
-                }}
-              >
-                {title}
-              </p>
-            </Link>
-          </li>
+            id={id}
+            posterPath={posterPath}
+            overview={overview}
+            title={title}
+          />
         );
       })}
     </MoviesList>
