@@ -1,61 +1,22 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from 'components/Header/Header';
+import { MainContent, LayoutWrapper, Footer } from './Layout.styled';
 
 const Layout = () => {
   return (
-    <>
-      <header
-        style={{
-          padding: '20px',
-          backgroundColor: '#307848',
-          color: 'white',
-        }}
-      >
-        <nav
-          style={{
-            display: 'flex',
-            gap: '20px',
-            
-
-          }}
-        >
-          <NavLink
-            to="/"
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-              textTransform: 'uppercase',
-            }}
-           
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/movies"
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-              textTransform: 'uppercase',
-            }}
-            
-          >
-            Movies
-          </NavLink>
-        </nav>
-      </header>
-      <main style={{          
-          padding: '12px',
-        }}>
+    <LayoutWrapper>
+      <ToastContainer autoClose={3000} />
+      <Header />
+      <MainContent>
         <Outlet />
-      </main>
-      <footer style={{
-          padding: '12px',
-          textAlign: 'center',
-          textTransform: 'uppercase',
-          backgroundColor: '#307848',
-          color: 'white',
-        }}><p>&#169; 2023 Created by Yuliia Rudenko</p></footer>
-    </>
+      </MainContent>
+      <Footer>
+        <p>&#169; 2023 Created by Yuliia Rudenko</p>
+      </Footer>
+    </LayoutWrapper>
   );
 };
 
