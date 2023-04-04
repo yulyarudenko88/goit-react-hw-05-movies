@@ -31,14 +31,7 @@ const MoviesGallery = ({ movies }) => {
 };
 
 MoviesGallery.propTypes = {
-  movies: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      poster_path: PropTypes.string,
-      overview: PropTypes.string.isRequired,
-    })
-  ),
+  movies: PropTypes.array,
 };
 
 export default MoviesGallery;
