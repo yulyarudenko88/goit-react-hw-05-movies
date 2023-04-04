@@ -1,68 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { VscSearch } from 'react-icons/vsc';
+import { toast } from 'react-toastify';
 import { fetchMoviesBySearch } from 'services/api';
-// import Loader from 'components/Loader/Loader';
+import Loader from 'components/Loader/Loader';
+import MoviesGallery from 'components/MoviesGallery/MoviesGallery';
 
 const Movies = () => {
   const [searchWord, setSearchWord] = useState('');
-  // const [movie, setMovie] = useState({});
-  // const [loading, setLoading] = useState(false);
+  const [movies, setMovie] = useState({});
+  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
     if (query === '') return;
-    // setLoading(true);
+    setLoading(true);
 
-    const getMovieById = async query => {
+    const getMoviesBySearch = async query => {
       try {
         const response = await fetchMoviesBySearch(query);
-
         console.log(response);
-        // setMovie(response);
-        // setLoading(false);
+
+        if (response.length < 1) {
+          toast.warn('Sorry,we can not find it! Please try again!');
+        }
+
+        setMovie(response);
+        setLoading(false);
       } catch (error) {
-        console.log(error.message);
+        toast.error(
+          'Sorry for the inconvenience! Please try to use our service in a few minutes!'
+        );
       }
     };
-    getMovieById(query);
+    getMoviesBySearch(query);
   }, [query]);
-
-  // const updateQueryString = (query) => {
-  //   const nextParams = query !== "" ? { query } : {};
-  //   setSearchParams(nextParams);
-  // };
-  // useEffect(() => {
-  //   if (!inputParam) {
-  //     return;
-  //   }
-  //   async function fetch() {
-  //     try {
-  //       const { results } = await fetchSearchApi(inputParam);
-  //       if (results.length < 1) {
-  //         Notiflix.Notify.warning("We can't find it, try again");
-  //       }
-  //       setMovies(results);
-  //     } catch (error) {
-  //       Notiflix.Notify.warning('Something wrong, try again please');
-  //     }
-  //   }
-  //   fetch();
-  // }, [inputParam]);
-
-  // const onSubmit = e => {
-  //   if (!input) {
-  //     Notiflix.Notify.warning('Please fill in the gap');
-  //   }
-  //   e.preventDefault();
-  //   setSearchParams(input !== '' ? { filter: input } : {});
-  //   setInput('');
-  // };
-
-  // const onChangeInput = value => {
-  //   setInput(value);
-  // };
 
   // if (!movies) {
   //   return null;
@@ -72,7 +45,13 @@ const Movies = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (!searchWord) {
+      toast.warn('Sorry,we can not find it! Please try again!');
+    }
+
     setSearchParams(searchWord !== '' ? { query: searchWord } : {});
+    console.log(searchParams.get('query'));
     reset();
   };
 
@@ -80,16 +59,18 @@ const Movies = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} style={{
-  display: 'inline-flex',
-  gap: '4px',
-  marginTop: '12px',
-  marginLeft: '12px',
-}}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'inline-flex',
+          gap: '4px',
+          marginTop: '12px',
+          marginLeft: '12px',
+        }}
+      >
         <input
           type="text"
           autoComplete="off"
-          
           placeholder="Search movies..."
           name="input"
           value={searchWord}
@@ -101,25 +82,33 @@ const Movies = () => {
             fontFamily: 'inherit',
             border: '1px solid rgb(80, 200, 120)',
             // borderColor: 'rgb(80, 200, 120)',
-            outline: 'none'
+            outline: 'none',
           }}
         />
-        <button type="submit" style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(80, 200, 120)',
-    color: 'white',
-    textDecoration: 'none',
-    fontSize: '16px',
-    fontFamily: 'inherit',
-    borderRadius: '12px',
-    padding: '10px 20px',
-    border: 'none',
-  }}>
-          <VscSearch size={20} /> <span style={{ marginLeft: '4px' }}>Search</span>
+        <button
+          type="submit"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgb(80, 200, 120)',
+            color: 'white',
+            textDecoration: 'none',
+            fontSize: '16px',
+            fontFamily: 'inherit',
+            borderRadius: '12px',
+            padding: '10px 20px',
+            border: 'none',
+          }}
+        >
+          <VscSearch size={20} />{' '}
+          <span style={{ marginLeft: '4px' }}>Search</span>
         </button>
       </form>
+      <>
+      {loading && <Loader />}      
+      {!loading && movies.length > 0 && <MoviesGallery movies={movies} />}
+    </>
     </>
   );
 };
