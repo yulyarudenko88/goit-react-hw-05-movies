@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { FiArrowLeft } from 'react-icons/fi';
 
 import { fetchMovieById } from 'services/api';
 import Loader from 'components/Loader/Loader';
 import {
-  StyledLink,
   MovieDetailsWrapper,
   PosterImage,
   MovieDetailsContent,
   AdditionalInfoWrapper,
   AdditionalInfoLink,
 } from './MovieDetails.styled';
+import ButtonGoBack from 'components/ButtonGoBack/ButtonGoBack';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
@@ -57,15 +56,7 @@ const MovieDetails = () => {
 
   return (
     <>
-      <StyledLink to="/">
-        <FiArrowLeft
-          style={{
-            width: '20px',
-            height: '20px',
-          }}
-        />
-        Go back
-      </StyledLink>
+      <ButtonGoBack to={"/"}/>        
       {loading && <Loader />}
       {!loading && movie !== {} && (
         <>
