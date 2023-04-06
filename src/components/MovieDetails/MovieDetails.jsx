@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -15,20 +15,16 @@ import ButtonGoBack from 'components/ButtonGoBack/ButtonGoBack';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({});
-  const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
   const location = useLocation();
-  const backLinkLocation = useRef(location.state ?? "/");
+  const backLinkLocation = useRef(location.state ?? '/');
 
   useEffect(() => {
-    setLoading(true);
-
     const getMovieById = async movieId => {
       try {
         const response = await fetchMovieById(movieId);
 
         setMovie(response);
-        setLoading(false);
       } catch (error) {
         toast.error(
           'Sorry for the inconvenience! Please try to use our service in a few minutes!'
@@ -58,9 +54,8 @@ const MovieDetails = () => {
 
   return (
     <>
-      <ButtonGoBack to={backLinkLocation.current}/>        
-      {loading && <Loader />}
-      {!loading && movie !== {} && (
+      <ButtonGoBack to={backLinkLocation.current} />
+      {movie !== {} && (
         <>
           <MovieDetailsWrapper>
             <PosterImage src={posterPath} alt={tagline} />
@@ -93,7 +88,9 @@ const MovieDetails = () => {
               </li>
             </ul>
           </AdditionalInfoWrapper>
-          <Outlet />
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
         </>
       )}
     </>
