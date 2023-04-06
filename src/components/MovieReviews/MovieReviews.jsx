@@ -4,23 +4,22 @@ import { FiCornerDownRight } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 
 import { fetchMovieReviews } from 'services/api';
-import Loader from 'components/Loader/Loader';
-import { ReviewsList, ReviewsDoesNotExist, ReviewsListItem } from './MovieReviews.styled';
+import {
+  ReviewsList,
+  ReviewsDoesNotExist,
+  ReviewsListItem,
+} from './MovieReviews.styled';
 
 const MovieReviews = () => {
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-
     const getMovieReviews = async () => {
       try {
         const data = await fetchMovieReviews(movieId);
-       
+
         setReviews(data);
-        setLoading(false);
       } catch (error) {
         toast.error(
           'Sorry for the inconvenience! Please try to use our service in a few minutes!'
@@ -32,18 +31,15 @@ const MovieReviews = () => {
 
   return (
     <>
-      {loading && <Loader />}
-      {!loading && reviews.length === 0 && (
+      {reviews.length === 0 && (
         <ReviewsDoesNotExist>
           Sorry, there are no reviews yet...
         </ReviewsDoesNotExist>
       )}
-      {!loading && reviews.length > 0 && (
+      {reviews.length > 0 && (
         <ReviewsList>
           {reviews.map(({ id, author, content }) => (
-            <ReviewsListItem
-              key={id}              
-            >
+            <ReviewsListItem key={id}>
               <h3>
                 <FiCornerDownRight /> {author}
               </h3>
