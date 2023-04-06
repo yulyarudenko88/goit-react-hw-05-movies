@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMovieById } from 'services/api';
@@ -17,6 +17,8 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkLocation = useRef(location.state ?? "/");
 
   useEffect(() => {
     setLoading(true);
@@ -56,7 +58,7 @@ const MovieDetails = () => {
 
   return (
     <>
-      <ButtonGoBack to={"/"}/>        
+      <ButtonGoBack to={backLinkLocation.current}/>        
       {loading && <Loader />}
       {!loading && movie !== {} && (
         <>
