@@ -19,6 +19,11 @@ export const CastListItem = styled.li`
   border-radius: 5px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+
+  img {
+    height: 235px;
+    object-fit: cover;
+  }
 `;
 
 export const ItemInfoWrapper = styled.div`
@@ -32,5 +37,7 @@ export const ItemInfoName = styled.p`
 `;
 
 export const ItemInfoCharacter = styled.p`
+  text-transform: uppercase;
+  color: #102818;
   font-size: 14px;
 `;

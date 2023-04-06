@@ -22,11 +22,13 @@ export const MovieDetailsContent = styled.div`
   h1 {
     text-align: center;
     margin-bottom: 8px;
+    color: rgb(80, 200, 120);
   }
 
   h2,
   h3 {
     font-size: 25px;
+    color: rgb(80, 200, 120);
   }
 
   p {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { VscSearch } from 'react-icons/vsc';
 import { toast } from 'react-toastify';
 import { fetchMoviesBySearch } from 'services/api';
@@ -12,6 +12,8 @@ const Movies = () => {
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
+  const location = useLocation();
+  console.log(location)
 
   useEffect(() => {
     if (query === '') return;
@@ -107,7 +109,7 @@ const Movies = () => {
       </form>
       <>
       {loading && <Loader />}      
-      {!loading && movies.length > 0 && <MoviesGallery movies={movies} />}
+      {!loading && movies.length > 0 && <MoviesGallery movies={movies} state={{state: location}}/>}
     </>
     </>
   );

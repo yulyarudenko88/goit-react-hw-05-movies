@@ -55,7 +55,7 @@ const MovieCast = () => {
                 <img src={profilePath} alt={name} />
                 <ItemInfoWrapper>
                   <ItemInfoName>{name}</ItemInfoName>
-                  <ItemInfoCharacter>({character})</ItemInfoCharacter>
+                  <ItemInfoCharacter>{character}</ItemInfoCharacter>
                 </ItemInfoWrapper>
               </CastListItem>
             );

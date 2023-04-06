@@ -1,12 +1,13 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 import MoviesGalleryItem from 'components/MoviesGalleryItem/MoviesGalleryItem';
 import { MoviesList } from './MoviesGallery.styled';
 
-const MoviesGallery = ({ movies }) => {
+const MoviesGallery = ({ movies, state }) => {
   return (
     <MoviesList>
-      {movies.map(({ id, title, poster_path, overview }) => {
+      {movies.map(({ id, title, poster_path, overview, to }) => {
         let posterPath = '';
 
         if (poster_path) {
@@ -23,6 +24,8 @@ const MoviesGallery = ({ movies }) => {
             posterPath={posterPath}
             overview={overview}
             title={title}
+            state={state}
+            to={`movies/${id}`}
           />
         );
       })}
