@@ -15,7 +15,7 @@ const Home = () => {
 
     const getPopularMovies = async () => {
       try {
-        const data = await fetchPopularMovies();
+        const data = await fetchPopularMovies();        
         setPopularMovies(data);
         setLoading(false);
       } catch (error) {
@@ -39,7 +39,7 @@ const Home = () => {
       {!loading && popularMovies.length > 0 && (
         <>
           <MainTitle>Trending Today</MainTitle>
-          <MoviesGallery movies={popularMovies} />
+          <MoviesGallery movies={popularMovies} pathTo={`movies/`}/>
         </>
       )}
     </>
