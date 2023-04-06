@@ -3,18 +3,30 @@ import { Link } from 'react-router-dom';
 
 export const MovieDetailsWrapper = styled.section`
   display: flex;
-  padding: 12px;
+  padding: 15px;
   align-items: center;
+
+  @media screen and (max-width: 767px) {
+  flex-direction: column;
+}
 `;
 
 export const PosterImage = styled.img`
+@media screen and (max-width: 767px) {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 15px;
+}
+
+@media screen and (min-width: 768px) {
   margin-right: 20px;
+}
+
   max-width: 320px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
 `;
 
 export const MovieDetailsContent = styled.div`
-  /* max-width: 500px; */
   padding: 4px 8px;
   border: 2px solid rgb(80, 200, 120);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
