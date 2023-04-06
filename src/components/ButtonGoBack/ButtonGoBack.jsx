@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FiArrowLeft } from 'react-icons/fi';
 import { StyledLink } from "./ButtonGoBack.styled";
 
@@ -14,5 +15,9 @@ const ButtonGoBack = ({to}) => (
     Go back
   </StyledLink>
 );
+
+ButtonGoBack.propTypes = {
+  to: PropTypes.object,
+};
 
 export default ButtonGoBack;
