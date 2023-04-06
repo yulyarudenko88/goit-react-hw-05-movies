@@ -6,7 +6,7 @@ export const LayoutWrapper = styled.div`
 
 export const MainContent = styled.main`
   min-height: calc(100vh - 128px);
-  padding-bottom: 50px;
+  padding-bottom: 48px;
 `;
 
 export const Footer = styled.footer`
