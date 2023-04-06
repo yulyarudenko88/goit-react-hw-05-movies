@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import MoviesGalleryItem from 'components/MoviesGalleryItem/MoviesGalleryItem';
 import { MoviesList } from './MoviesGallery.styled';
 
-const MoviesGallery = ({ movies, state }) => {
+const MoviesGallery = ({ movies, pathTo }) => {
   return (
     <MoviesList>
-      {movies.map(({ id, title, poster_path, overview, to }) => {
+      {movies.map(({ id, title, poster_path, overview }) => {
         let posterPath = '';
 
         if (poster_path) {
@@ -23,9 +23,8 @@ const MoviesGallery = ({ movies, state }) => {
             id={id}
             posterPath={posterPath}
             overview={overview}
-            title={title}
-            state={state}
-            to={`movies/${id}`}
+            title={title} 
+            pathTo={pathTo}           
           />
         );
       })}
@@ -35,6 +34,7 @@ const MoviesGallery = ({ movies, state }) => {
 
 MoviesGallery.propTypes = {
   movies: PropTypes.array,
+  pathTo: PropTypes.string.isRequired,
 };
 
 export default MoviesGallery;
