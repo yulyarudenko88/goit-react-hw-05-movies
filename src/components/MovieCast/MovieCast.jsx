@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMovieCast } from 'services/api';
-import Loader from 'components/Loader/Loader';
 import {
   CastList,
   CastListItem,
@@ -14,18 +13,14 @@ import {
 
 const MovieCast = () => {
   const [cast, setCast] = useState([]);
-  const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-
     const getMovieCast = async () => {
       try {
         const data = await fetchMovieCast(movieId);
 
         setCast(data.cast);
-        setLoading(false);
       } catch (error) {
         toast.error(
           'Sorry for the inconvenience! Please try to use our service in a few minutes!'
@@ -37,8 +32,7 @@ const MovieCast = () => {
 
   return (
     <>
-      {loading && <Loader />}
-      {!loading && cast.length > 0 && (
+      {cast.length > 0 && (
         <CastList>
           {cast.map(({ id, profile_path, name, character }) => {
             let profilePath = '';
