@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const MovieListItem = styled.li`
   background-color: #50c878;
-  
+
   border-radius: 5px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -23,6 +23,8 @@ export const MovieLink = styled(Link)`
   img {
     display: block;
     width: 100%;
+    height: 445px;
+    object-fit: cover;
   }
 
   p {
@@ -32,4 +34,3 @@ export const MovieLink = styled(Link)`
     text-align: center;
   }
 `;
-
