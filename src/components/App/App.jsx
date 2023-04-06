@@ -1,10 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
+import { lazy } from 'react';
 import Layout from 'components/Layout/Layout';
-import Home from 'pages/Home/Home';
-import MovieDetails from 'components/MovieDetails/MovieDetails';
-import MovieCast from 'components/MovieCast/MovieCast';
-import MovieReviews from 'components/MovieReviews/MovieReviews';
-import Movies from 'pages/Movies/Movies';
+
+const Home = lazy(() => import('../../pages/Home/Home'));
+const Movies = lazy(() => import('../../pages/Movies/Movies'));
+const MovieDetails = lazy(() => import('../MovieDetails/MovieDetails'));
+const MovieCast = lazy(() => import('../MovieCast/MovieCast'));
+const MovieReviews = lazy(() => import('../MovieReviews/MovieReviews'));
 
 export const App = () => {
   return (
@@ -12,10 +14,10 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="movies" element={<Movies/>} />
+          <Route path="movies" element={<Movies />} />
           <Route path="movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<MovieCast />} />
-            <Route path="reviews" element={<MovieReviews/>} />
+            <Route path="reviews" element={<MovieReviews />} />
           </Route>
         </Route>
       </Routes>
