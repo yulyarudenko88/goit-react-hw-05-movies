@@ -22,7 +22,6 @@ export const MovieLink = styled(Link)`
 
   img {
     display: block;
-    width: 100%;
     height: 445px;
     object-fit: cover;
   }
